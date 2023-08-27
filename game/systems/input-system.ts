@@ -4,7 +4,7 @@ import {getPlayer} from "../helper/get-player";
 import {ClientID} from "../resources/client-id";
 import {System} from "./system";
 
-export class InputSystem extends System<[ClientID]> {
+export class InputSystem implements System<[ClientID]> {
   public update(state: GameState): void {}
 
   public boot(state: GameState, resources: Resources<[ClientID]>) {

@@ -2,7 +2,7 @@ import {GameState} from "~/game/game-state";
 import {System} from "./system";
 import {Resources} from "../game";
 
-export class MoveSystem extends System {
+export class MoveSystem implements System {
   public update({players}: GameState): void {
     for (const p of players) {
       p.position.x += p.velocity.x;

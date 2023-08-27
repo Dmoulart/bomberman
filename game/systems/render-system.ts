@@ -1,7 +1,7 @@
 import {GameState} from "~/game/game-state";
 import {System} from "./system";
 
-export class RenderSystem extends System {
+export class RenderSystem implements System {
   private canvas!: HTMLCanvasElement;
   private ctx!: CanvasRenderingContext2D;
 
