@@ -1,12 +1,13 @@
-import {GameResources} from "../game";
+import {Resources} from "../game";
 import {GameState} from "../game-state";
 import {getPlayer} from "../helper/get-player";
+import {ClientID} from "../resources/client-id";
 import {System} from "./system";
 
-export class InputSystem extends System {
+export class InputSystem extends System<[ClientID]> {
   public update(state: GameState): void {}
 
-  public boot(state: GameState, resources: GameResources) {
+  public boot(state: GameState, resources: Resources<[ClientID]>) {
     const player = getPlayer(state, resources);
 
     document.addEventListener("keydown", ({key}) => {

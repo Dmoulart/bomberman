@@ -1,8 +1,9 @@
 import {GameState} from "~/game/game-state";
 import {Resource} from "../resources/resource";
-import {GameResources} from "../game";
+import {Resources} from "../game";
 
-export abstract class System {
-  public boot(state: GameState, resources: GameResources): void {}
-  public abstract update(state: GameState, resources: GameResources): void;
+export abstract class System<R extends Readonly<Array<Resource>> = any> {
+  public boot(state: GameState, resources: Resources<R>): void {}
+
+  public abstract update(state: GameState, resources: Resources<R>): void;
 }
