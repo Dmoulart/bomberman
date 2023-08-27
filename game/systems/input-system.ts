@@ -1,10 +1,14 @@
-import {GameState} from "./game-state";
+import {GameResources} from "../game";
+import {GameState} from "../game-state";
+import {getPlayer} from "../helper/get-player";
 import {System} from "./system";
 
 export class InputSystem extends System {
   public update(state: GameState): void {}
 
-  public boot({player}: GameState) {
+  public boot(state: GameState, resources: GameResources) {
+    const player = getPlayer(state, resources);
+
     document.addEventListener("keydown", ({key}) => {
       switch (key) {
         case "ArrowLeft":

@@ -1,9 +1,10 @@
-import {GameState} from "./game-state";
+import {GameState} from "~/game/game-state";
 import {System} from "./system";
+import {GameResources} from "../game";
 
 export class MoveSystem extends System {
-  public update({player, players}: GameState): void {
-    for (const p of players.concat(player)) {
+  public update({players}: GameState, resources: GameResources): void {
+    for (const p of players) {
       p.position.x += p.velocity.x;
       p.position.y += p.velocity.y;
 

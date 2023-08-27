@@ -1,25 +1,33 @@
-import { GameState, createGameState } from "./game-state";
-import { Player } from "./player";
-import { System } from "./system";
+import {GameState, createGameState} from "./game-state";
+import {System} from "./systems/system";
+import {Resource} from "./resources/resource";
+
+export type GameResources = Map<Resource["type"], Resource>;
+
+export type GameConfig = {
+  systems: Array<System>;
+  resources?: Array<Resource>;
+};
 
 export class Game {
-  public players: Player[] = [];
-
   private state!: GameState;
 
-  constructor(private systems: Array<System>) {
+  private systems!: Array<System>;
+
+  private resources: GameResources = new Map();
+
+  constructor({systems, resources = []}: GameConfig) {
+    this.systems = systems;
+
+    for (const resource of resources) {
+      this.resources.set(resource.type, resource);
+    }
+
     this.state = createGameState(1);
   }
 
   public boot() {
-    this.state.player = {
-      id: 0,
-      position: { x: 0, y: 0 },
-      velocity: { x: 0, y: 0 },
-      speed: 10,
-    };
-
-    this.systems.forEach((system) => system.boot?.(this.state));
+    this.systems.forEach((system) => system.boot?.(this.state, this.resources));
 
     this.step();
   }
@@ -37,6 +45,8 @@ export class Game {
   private update() {
     //update position
 
-    this.systems.forEach((system) => system.update?.(this.state));
+    this.systems.forEach((system) =>
+      system.update?.(this.state, this.resources)
+    );
   }
 }

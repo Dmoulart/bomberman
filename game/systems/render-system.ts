@@ -1,5 +1,5 @@
-import { GameState } from "./game-state";
-import { System } from "./system";
+import {GameState} from "~/game/game-state";
+import {System} from "./system";
 
 export class RenderSystem extends System {
   private canvas!: HTMLCanvasElement;
@@ -12,13 +12,10 @@ export class RenderSystem extends System {
     this.ctx = this.canvas.getContext("2d")!;
   }
 
-  public update(state: GameState): void {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.strokeRect(
-      state.player.position.x,
-      state.player.position.y,
-      20,
-      20
-    );
+  public update({players}: GameState): void {
+    for (const player of players) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.strokeRect(player.position.x, player.position.y, 20, 20);
+    }
   }
 }

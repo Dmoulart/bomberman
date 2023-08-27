@@ -1,7 +1,7 @@
-import {Vec} from "./vec";
+import {Vec} from "./math/vec";
 
 export type Player = {
-  id: number;
+  clientId: number;
   position: Vec;
   velocity: Vec;
   speed: number;
