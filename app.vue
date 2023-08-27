@@ -10,10 +10,7 @@ import {RenderSystem} from "~/game/systems/render-system";
 onMounted(() => {
   const game = new Game({
     systems: [new InputSystem(), new MoveSystem(), new RenderSystem()],
-    resources: [
-      {type: "server-id", id: 1},
-      {type: "client-id", id: 1, ok: "ok"},
-    ],
+    resources: [{type: "client-id", id: 0}],
   });
 
   game.boot();

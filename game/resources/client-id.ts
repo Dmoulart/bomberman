@@ -1,1 +1,1 @@
-export type ClientID = {type: "client-id"; id: number, ok :"ok"};
+export type ClientID = {type: "client-id"; id: number};
