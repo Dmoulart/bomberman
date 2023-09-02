@@ -14,10 +14,12 @@ import {createEventStream} from "./composables/stream";
 let msg = ref("no data");
 
 onMounted(() => {
+  const runtimeConfig = useRuntimeConfig();
+  console.log({runtimeConfig});
   const eventStream = createEventStream<{
     message: {msg: string};
     error: {message: string};
-  }>("ws://localhost:8080");
+  }>((runtimeConfig as any).public.WS_ENDPOINT);
   const {send, on} = eventStream;
   on("message", ({}) => {
     console.log("receive msg");
