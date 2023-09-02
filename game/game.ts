@@ -39,6 +39,14 @@ export class Game<R extends Resource[], S extends System<R>[]> {
     this.step();
   }
 
+  public getSystem<T extends new (...args: any) => System<R>>(
+    ctor: T
+  ): InstanceType<T> {
+    return this.systems.find(
+      (system) => system instanceof ctor
+    ) as InstanceType<T>;
+  }
+
   /**
    * Game loop
    */

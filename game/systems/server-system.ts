@@ -5,7 +5,7 @@ import {Resources} from "../game";
 import {ServerSocketConfig} from "../resources/server-socket-config";
 
 export class ServerSystem implements System<[ServerSocketConfig]> {
-  private socket!: Pusher;
+  public socket!: Pusher;
 
   public boot(
     state: GameState,
@@ -16,6 +16,7 @@ export class ServerSystem implements System<[ServerSocketConfig]> {
     // pusher.trigger("my-channel", "my-event", {
     //   message: "hello world",
     // });
+      this.socket.
   }
 
   update(state: GameState, resources: Resources<any>): void {

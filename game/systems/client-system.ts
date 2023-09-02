@@ -18,7 +18,8 @@ export class ClientSystem implements System<[ClientSocketConfig]> {
 
     this.channel = this.socket.subscribe("game");
     this.socket.connection.bind("connected", (data: any) => {
-      console.log("client connected ", {data});
+      console.log("client connected ", {data, user: this.socket.user});
+      this.socket.send_event("game:new-user", {socketId: data.socket_id});
     });
     this.socket.connection.bind("error", (err: any) => {
       console.error({err});

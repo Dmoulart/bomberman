@@ -37,10 +37,25 @@ onMounted(() => {
     ],
     resources: [
       {type: "client-id", id: 0},
-      {type: "pusher-cli-opts", appKey: "8e159b83fa8e7f9550d7", cluster: "eu"},
+      {
+        type: "pusher-cli-opts",
+        appKey: "8e159b83fa8e7f9550d7",
+        cluster: "eu",
+        authEndpoint: "/api/auth",
+        userAuthentication: {
+          endpoint: "/api/auth",
+          transport: "ajax",
+        },
+      },
     ],
   });
 
   game.boot();
 });
 </script>
+
+<style>
+body {
+  background: black;
+}
+</style>
