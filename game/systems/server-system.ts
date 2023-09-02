@@ -16,7 +16,6 @@ export class ServerSystem implements System<[ServerSocketConfig]> {
     // pusher.trigger("my-channel", "my-event", {
     //   message: "hello world",
     // });
-      this.socket.
   }
 
   update(state: GameState, resources: Resources<any>): void {
