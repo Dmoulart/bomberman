@@ -6,13 +6,14 @@ import {Game} from "~/game/game";
 import {InputSystem} from "~/game/systems/input-system";
 import {MoveSystem} from "~/game/systems/move-system";
 import {RenderSystem} from "~/game/systems/render-system";
-
-useHead({
-  script: [
-    {src: "https://js.pusher.com/8.2.0/pusher.min.js"},
-    {src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"},
-  ],
-});
+import {ClientSystem} from "~/game/systems/client-system";
+import Pusher from "pusher-js";
+// useHead({
+//   script: [
+//     {src: "https://js.pusher.com/8.2.0/pusher.min.js"},
+//     {src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"},
+//   ],
+// });
 
 onMounted(() => {
   // Enable pusher logging - don't include this in production
@@ -28,8 +29,16 @@ onMounted(() => {
   });
 
   const game = new Game({
-    systems: [new InputSystem(), new MoveSystem(), new RenderSystem()],
-    resources: [{type: "client-id", id: 0}],
+    systems: [
+      new InputSystem(),
+      new MoveSystem(),
+      new RenderSystem(),
+      new ClientSystem(),
+    ],
+    resources: [
+      {type: "client-id", id: 0},
+      {type: "pusher-cli-opts", appKey: "8e159b83fa8e7f9550d7", cluster: "eu"},
+    ],
   });
 
   game.boot();

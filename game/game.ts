@@ -30,8 +30,6 @@ export class Game<R extends Resource[], S extends System<R>[]> {
       this.resources[resource.type as ResourceKey] = resource as ResourceValue;
     }
 
-    this.systems.push();
-
     this.state = createGameState(1);
   }
 
@@ -46,17 +44,11 @@ export class Game<R extends Resource[], S extends System<R>[]> {
    */
   private step() {
     // update state
-    this.update();
-
-    requestAnimationFrame(() => this.step());
-  }
-
-  private update() {
-    //update position
-
     this.systems.forEach((system) =>
       system.update?.(this.state, this.resources)
     );
+
+    requestAnimationFrame(() => this.step());
   }
 }
 
